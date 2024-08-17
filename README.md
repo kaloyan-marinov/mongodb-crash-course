@@ -102,13 +102,13 @@ via the `mongosh` command-line client/interface/utility
       -it \
       --rm \
       --network network-m-c-c \
-      mongo \
-	      mongosh \
-         --host container-m-c-c \
-		   --username $(grep -oP '^MONGO_USERNAME=\K.*' .env) \
-		   --password $(grep -oP '^MONGO_PASSWORD=\K.*' .env) \
-		   --authenticationDatabase admin \
-		   $(grep -oP '^MONGO_DATABASE=\K.*' .env)
+      mongo:latest \
+         mongosh \
+            --host container-m-c-c \
+		      --username $(grep -oP '^MONGO_USERNAME=\K.*' .env) \
+		      --password $(grep -oP '^MONGO_PASSWORD=\K.*' .env) \
+		      --authenticationDatabase admin \
+		      $(grep -oP '^MONGO_DATABASE=\K.*' .env)
    ```
 
 [step 4]
