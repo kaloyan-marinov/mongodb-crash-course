@@ -515,3 +515,12 @@ db-4-m-c-c> db.posts.find().count()
 db-4-m-c-c> db.posts.find({ category: 'Tech' }).count()
 0
 ```
+
+[step 5]
+
+to get Docker to clean up the created network, volume, and container,
+you can issue
+
+   ```bash
+   ./clean-docker-artifacts.sh
+   ```
