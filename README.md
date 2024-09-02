@@ -117,52 +117,53 @@ if you performed the preceding step successfully,
 you have a live instance of the MongoDB shell;
 within that, you can perform Create/Read/Update/Delete (CRUD) operations;
 
-- Commands for working with databases:
+Commands for working with databases:
 
-   ```
-   db-4-m-c-c> // Show the current database.
-   db-4-m-c-c> db
-   db-4-m-c-c
+```
+db-4-m-c-c> // Show the current database.
+db-4-m-c-c> db
+db-4-m-c-c
 
-   db-4-m-c-c> // Show all databases.
-   db-4-m-c-c> show dbs
-   admin   100.00 KiB
-   config   12.00 KiB
-   local    72.00 KiB
-   db-4-m-c-c> // The preceding command does not list `db-4-m-c-c`, because there is nothing in it yet.
+db-4-m-c-c> // Show all databases.
+db-4-m-c-c> show dbs
+admin   100.00 KiB
+config   12.00 KiB
+local    72.00 KiB
+db-4-m-c-c> // The preceding command does not list `db-4-m-c-c`, because there is nothing in it yet.
 
-   db-4-m-c-c> use blog
-   switched to db blog
-   blog> show dbs
-   admin   100.00 KiB
-   config   12.00 KiB
-   local    72.00 KiB
+db-4-m-c-c> use blog
+switched to db blog
+blog> show dbs
+admin   100.00 KiB
+config   12.00 KiB
+local    72.00 KiB
 
-   blog> // Again: The preceding command does not list `blog`, because there is nothing in it yet.
-   blog> use db-4-m-c-c
-   switched to db db-4-m-c-c
-   ```
+blog> // Again: The preceding command does not list `blog`, because there is nothing in it yet.
+blog> use db-4-m-c-c
+switched to db db-4-m-c-c
+```
 
-- Commands for creating collections in a database
-  and documents in a collection:
+Commands for creating collections in a database
+and documents in a collection:
 
-   ```
-   db-4-m-c-c> // db.createCollection("posts")
+```
+db-4-m-c-c> // db.createCollection("posts")
 
-   db-4-m-c-c> db.posts.insertOne({
-   ...   title: 'Post 1',
-   ...   body: 'Body of post.',
-   ...   category: 'News',
-   ...   likes: 1,
-   ...   tags: ['news', 'events'],
-   ...   date: Date()
-   ... })
-   {
-   acknowledged: true,
-   insertedId: ObjectId('66c0c2b547e4d45c14149f48')
-   }
+db-4-m-c-c> db.posts.insertOne({
+  title: 'Post 1',
+  body: 'Body of post.',
+  category: 'News',
+  likes: 1,
+  tags: ['news', 'events'],
+  date: Date()
+})
 
-   db-4-m-c-c> db.posts.insertMany([
+{
+  acknowledged: true,
+  insertedId: ObjectId('66d5430fd26a0b6146149f48')
+}
+
+db-4-m-c-c> db.posts.insertMany([
    {
       title: 'Post 2',
       body: 'Body of post.',
@@ -195,135 +196,193 @@ within that, you can perform Create/Read/Update/Delete (CRUD) operations;
       tags: ['news', 'events'],
       date: Date()
    }
-   ])
-   {
-   acknowledged: true,
-   insertedIds: {
-      '0': ObjectId('66c0c2cd47e4d45c14149f49'),
-      '1': ObjectId('66c0c2cd47e4d45c14149f4a'),
-      '2': ObjectId('66c0c2cd47e4d45c14149f4b'),
-      '3': ObjectId('66c0c2cd47e4d45c14149f4c')
-   }
-   }
-   ```
+])
 
-- Commands for reading documents from a collection:
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66d54339d26a0b6146149f49'),
+    '1': ObjectId('66d54339d26a0b6146149f4a'),
+    '2': ObjectId('66d54339d26a0b6146149f4b'),
+    '3': ObjectId('66d54339d26a0b6146149f4c')
+  }
+}
+```
 
-   ```
-   db-4-m-c-c> db.posts.find()
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'News',
-      likes: 1,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   },
-   {
-      _id: ObjectId('66c0c2cd47e4d45c14149f49'),
-      title: 'Post 2',
-      body: 'Body of post.',
-      category: 'Event',
-      likes: 2,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   },
-   {
-      _id: ObjectId('66c0c2cd47e4d45c14149f4a'),
-      title: 'Post 3',
-      body: 'Body of post.',
-      category: 'Tech',
-      likes: 3,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   },
-   {
-      _id: ObjectId('66c0c2cd47e4d45c14149f4b'),
-      title: 'Post 4',
-      body: 'Body of post.',
-      category: 'Event',
-      likes: 4,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   },
-   {
-      _id: ObjectId('66c0c2cd47e4d45c14149f4c'),
-      title: 'Post 5',
-      body: 'Body of post.',
-      category: 'News',
-      likes: 5,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
+Commands for reading documents from a collection:
 
-
-
-   db-4-m-c-c> db.posts.find({ category: 'News' })
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'News',
-      likes: 1,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   },
-   {
-      _id: ObjectId('66c0c2cd47e4d45c14149f4c'),
-      title: 'Post 5',
-      body: 'Body of post.',
-      category: 'News',
-      likes: 5,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
+```
+db-4-m-c-c> db.posts.find()
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  },
+  {
+    _id: ObjectId('66d54339d26a0b6146149f49'),
+    title: 'Post 2',
+    body: 'Body of post.',
+    category: 'Event',
+    likes: 2,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  },
+  {
+    _id: ObjectId('66d54339d26a0b6146149f4a'),
+    title: 'Post 3',
+    body: 'Body of post.',
+    category: 'Tech',
+    likes: 3,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  },
+  {
+    _id: ObjectId('66d54339d26a0b6146149f4b'),
+    title: 'Post 4',
+    body: 'Body of post.',
+    category: 'Event',
+    likes: 4,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  },
+  {
+    _id: ObjectId('66d54339d26a0b6146149f4c'),
+    title: 'Post 5',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 5,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  }
+]
 
 
 
-   db-4-m-c-c> db.posts.find({ category: 'news' }).count()
-   0
-   db-4-m-c-c> db.posts.find({ category: 'News' }).count()
-   2
+db-4-m-c-c> db.posts.find({ _id: ObjectId('66d5430fd26a0b6146149f48') })
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  }
+]
+
+db-4-m-c-c> db.posts.find({ category: 'News' })
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  },
+  {
+    _id: ObjectId('66d54339d26a0b6146149f4c'),
+    title: 'Post 5',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 5,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  }
+]
 
 
 
-   db-4-m-c-c> // db.posts.find().sort({ title: 1 })
-
-   db-4-m-c-c> // db.posts.find().sort({ title: -1 })
-
-
-
-   db-4-m-c-c> db.posts.find().limit(2)
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'News',
-      likes: 1,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   },
-   {
-      _id: ObjectId('66c0c2cd47e4d45c14149f49'),
-      title: 'Post 2',
-      body: 'Body of post.',
-      category: 'Event',
-      likes: 2,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
+db-4-m-c-c> db.posts.find({ category: 'news' }).count()
+0
+db-4-m-c-c> db.posts.find({ category: 'News' }).count()
+2
 
 
 
-   db-4-m-c-c> db.posts.findOne()
-   {
+db-4-m-c-c> db.posts.find().sort({ title: 1 })
+// ...
+
+db-4-m-c-c> db.posts.find().sort({ title: -1 })
+// ...
+
+
+
+db-4-m-c-c> db.posts.find().limit(2)
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  },
+  {
+    _id: ObjectId('66d54339d26a0b6146149f49'),
+    title: 'Post 2',
+    body: 'Body of post.',
+    category: 'Event',
+    likes: 2,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  }
+]
+
+db-4-m-c-c> db.posts.find().skip(2).limit(1)
+[
+  {
+    _id: ObjectId('66d54339d26a0b6146149f4a'),
+    title: 'Post 3',
+    body: 'Body of post.',
+    category: 'Tech',
+    likes: 3,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+  }
+]
+
+
+
+db-4-m-c-c> db.posts.findOne()
+{
+  _id: ObjectId('66d5430fd26a0b6146149f48'),
+  title: 'Post 1',
+  body: 'Body of post.',
+  category: 'News',
+  likes: 1,
+  tags: [ 'news', 'events' ],
+  date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+}
+
+db-4-m-c-c> db.posts.findOne({
+   likes: { $gt: 3 }
+})
+{
+  _id: ObjectId('66d54339d26a0b6146149f4b'),
+  title: 'Post 4',
+  body: 'Body of post.',
+  category: 'Event',
+  likes: 4,
+  tags: [ 'news', 'events' ],
+  date: 'Mon Sep 02 2024 04:46:49 GMT+0000 (Coordinated Universal Time)'
+}
+```
+
+Commands for updating documents in a collection:
+
+```
+db-4-m-c-c> db.posts.find({ title: "Post 1" })
+[
+{
    _id: ObjectId('66c0c2b547e4d45c14149f48'),
    title: 'Post 1',
    body: 'Body of post.',
@@ -331,203 +390,186 @@ within that, you can perform Create/Read/Update/Delete (CRUD) operations;
    likes: 1,
    tags: [ 'news', 'events' ],
    date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   }
+}
+]
 
-   db-4-m-c-c> db.posts.findOne({
-   ...    likes: { $gt: 3 }
-   ... })
-   {
-   _id: ObjectId('66c0c2cd47e4d45c14149f4b'),
-   title: 'Post 4',
-   body: 'Body of post.',
-   category: 'Event',
-   likes: 4,
-   tags: [ 'news', 'events' ],
-   date: 'Sat Aug 17 2024 15:33:33 GMT+0000 (Coordinated Universal Time)'
-   }
-   ```
+db-4-m-c-c> db.posts.updateOne({ title: 'Post 1' }, {
+  $set: {
+    category: 'Tech!?!?'
+  }
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
 
-- Commands for updating documents in a collection:
+db-4-m-c-c> db.posts.updateOne({ _id: ObjectId("66c0c2b547e4d45c14149f48") }, {
+  $set: {
+    category: 'Tech'
+  }
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
 
-   ```
-   db-4-m-c-c> db.posts.find({ title: "Post 1" })
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'News',
-      likes: 1,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
-
-   db-4-m-c-c> db.posts.updateOne({ title: 'Post 1' },
-   ... {
-   ...   $set: {
-   ...     category: 'Tech'
-   ...   }
-   ... })
-   {
-   acknowledged: true,
-   insertedId: null,
-   matchedCount: 1,
-   modifiedCount: 1,
-   upsertedCount: 0
-   }
-
-   db-4-m-c-c> db.posts.find({ title: "Post 1" })
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'Tech',
-      likes: 1,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
+db-4-m-c-c> db.posts.find({ title: "Post 1" })
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'Tech!?!?',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  }
+]
 
 
 
-   db-4-m-c-c> db.posts.updateOne({ title: 'Post 6' },
-   ... {
-   ...   $set: {
-   ...     title: 'Post 6',
-   ...     body: 'Body of post.',
-   ...     category: 'News'
-   ...   }
-   ... })
-   {
-   acknowledged: true,
-   insertedId: null,
-   matchedCount: 0,
-   modifiedCount: 0,
-   upsertedCount: 0
-   }
+db-4-m-c-c> db.posts.updateOne({ title: 'Post 6' },
+{
+  $set: {
+    title: 'Post 6',
+    body: 'Body of post.',
+    category: 'News'
+  }
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
 
-   db-4-m-c-c> db.posts.find({ title: "Post 6" })
+db-4-m-c-c> db.posts.find({ title: "Post 6" })
 
-   db-4-m-c-c> db.posts.updateOne({ title: 'Post 6' },
-   ... {
-   ...   $set: {
-   ...     title: 'Post 6',
-   ...     body: 'Body of post.',
-   ...     category: 'News'
-   ...   }
-   ... },
-   ... {
-   ...   upsert: true
-   ... })
-   {
-   acknowledged: true,
-   insertedId: ObjectId('66c0c7ff4d28bb07910962f6'),
-   matchedCount: 0,
-   modifiedCount: 0,
-   upsertedCount: 1
-   }
+db-4-m-c-c> db.posts.updateOne({ title: 'Post 6' },
+{
+  $set: {
+    title: 'Post 6',
+    body: 'Body of post.',
+    category: 'News'
+  }
+},
+{
+  upsert: true
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66d545f3f58304356c837027'),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
 
-   db-4-m-c-c> db.posts.find({ title: "Post 6" })
-   [
-   {
-      _id: ObjectId('66c0c7ff4d28bb07910962f6'),
-      title: 'Post 6',
-      body: 'Body of post.',
-      category: 'News'
-   }
-   ]
-
-
-
-   db-4-m-c-c> db.posts.find({ title: "Post 1" })
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'Tech',
-      likes: 1,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
-   db-4-m-c-c> db.posts.updateOne({ title: "Post 1" }, {
-   ...   $inc: {
-   ...     likes: 2
-   ...   }
-   ... })
-   {
-   acknowledged: true,
-   insertedId: null,
-   matchedCount: 1,
-   modifiedCount: 1,
-   upsertedCount: 0
-   }
-   db-4-m-c-c> db.posts.find({ title: "Post 1" })
-   [
-   {
-      _id: ObjectId('66c0c2b547e4d45c14149f48'),
-      title: 'Post 1',
-      body: 'Body of post.',
-      category: 'Tech',
-      likes: 3,
-      tags: [ 'news', 'events' ],
-      date: 'Sat Aug 17 2024 15:33:09 GMT+0000 (Coordinated Universal Time)'
-   }
-   ]
+db-4-m-c-c> db.posts.find({ title: "Post 6" })
+[
+  {
+    _id: ObjectId('66d545f3f58304356c837027'),
+    title: 'Post 6',
+    body: 'Body of post.',
+    category: 'News'
+  }
+]
 
 
 
-   db-4-m-c-c> db.posts.updateMany({}, {
-   ...   $inc: { likes: 1 }
-   ... })
-   {
-   acknowledged: true,
-   insertedId: null,
-   matchedCount: 6,
-   modifiedCount: 6,
-   upsertedCount: 0
-   }
+db-4-m-c-c> db.posts.find({ title: "Post 1" })
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'Tech!?!?',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  }
+]
+db-4-m-c-c> db.posts.updateOne({ title: "Post 1" }, {
+  $inc: {
+    likes: 2
+  }
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db-4-m-c-c> db.posts.find({ title: "Post 1" })
+[
+  {
+    _id: ObjectId('66d5430fd26a0b6146149f48'),
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'Tech!?!?',
+    likes: 3,
+    tags: [ 'news', 'events' ],
+    date: 'Mon Sep 02 2024 04:46:07 GMT+0000 (Coordinated Universal Time)'
+  }
+]
 
-   db-4-m-c-c> // For example, "Post 6" was created without any likes, but now:
-   db-4-m-c-c> db.posts.findOne({ title: "Post 6" })
-   {
-   _id: ObjectId('66c0c7ff4d28bb07910962f6'),
-   title: 'Post 6',
-   body: 'Body of post.',
-   category: 'News',
-   likes: 1
-   }
-   ```
-
-- Commands for deleting documents in a collection:
-
-   ```
-   db-4-m-c-c> db.posts.find().count()
-   6
-
-   db-4-m-c-c> db.posts.deleteOne({ title: 'Post 6' })
-   { acknowledged: true, deletedCount: 1 }
-
-   db-4-m-c-c> db.posts.find().count()
-   5
 
 
+db-4-m-c-c> db.posts.updateMany({}, {
+  $inc: { likes: 1 }
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 6,
+  modifiedCount: 6,
+  upsertedCount: 0
+}
 
-   db-4-m-c-c> db.posts.find({ category: 'Tech' }).count()
-   2
+db-4-m-c-c> // For example, "Post 6" was created without any likes, but now:
+db-4-m-c-c> db.posts.findOne({ title: "Post 6" })
+{
+  _id: ObjectId('66d545f3f58304356c837027'),
+  title: 'Post 6',
+  body: 'Body of post.',
+  category: 'News',
+  likes: 1
+}
+```
 
-   db-4-m-c-c> db.posts.deleteMany({ category: 'Tech' })
-   { acknowledged: true, deletedCount: 2 }
+Commands for deleting documents in a collection:
 
-   db-4-m-c-c> db.posts.find().count()
-   3
+```
+db-4-m-c-c> db.posts.find().count()
+6
 
-   db-4-m-c-c> db.posts.find({ category: 'Tech' }).count()
-   0
-   ```
+db-4-m-c-c> db.posts.deleteOne({ title: 'Post 6' })
+{ acknowledged: true, deletedCount: 1 }
+
+db-4-m-c-c> db.posts.find().count()
+5
+
+
+
+db-4-m-c-c> db.posts.find({ category: 'Tech' }).count()
+1
+
+db-4-m-c-c> db.posts.deleteMany({ category: 'Tech' })
+{ acknowledged: true, deletedCount: 1 }
+
+db-4-m-c-c> db.posts.find().count()
+4
+
+db-4-m-c-c> db.posts.find({ category: 'Tech' }).count()
+0
+```
 
 [step 5]
 
